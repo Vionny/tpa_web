@@ -1,0 +1,102 @@
+.light{
+    display:flex;
+    flex-direction:column;
+    color: black;
+    height:inherit;
+    .border{
+        border: solid 1px rgb(240, 240, 240);
+    }
+    .bl{
+        color:black
+    }
+    .sbg2{
+        background-color: rgb(238, 238, 238);
+    }
+    p{
+        color: rgb(122, 122, 122);
+        text-decoration: none;
+    }
+    .p2{
+        color: rgb(122, 122, 122);
+        text-decoration: none;
+    }
+    button{
+        background-color:#0080d6;
+        color: white;
+    }
+    .bt2{
+        background-color:white;
+        color: rgb(107, 107, 107);
+    }
+    .bg{
+        background-color: white;
+    }
+    .sbg{
+        background-color: rgb(251, 251, 251);
+    }
+    .im{
+        filter: invert(35%) sepia(62%) saturate(3690%) hue-rotate(184deg) brightness(93%) contrast(101%);
+    }
+    .links{
+        font-weight: 600;
+        text-decoration: none;
+        color:rgb(0, 81, 255);
+    }
+
+}
+
+.dark{
+    display:flex;
+    flex-direction:column;
+    color: white;
+    max-height:100%;
+    height:inherit;
+    .border{
+        border: solid 1px rgb(246, 246, 246);
+    }
+    
+
+    .bl{
+        color:white
+    }
+    button{
+        background-color:#272727;
+        color: white;
+        button:hover{
+            background-color:black;
+        }
+    }
+    .bt2{
+        button{
+            background-color:black;
+            color: white;
+        }
+        button:hover{
+            background-color:black;
+        }
+    }
+    p,h2{
+        color: white;
+    }
+    .p2{
+        text-decoration: none;
+        color: white;
+    }
+    .bg{
+        background-color: rgb(29, 29, 29)   
+    }
+    .sbg{
+        background-color: rgb(64, 63, 63)
+    }
+    .im{
+        filter: invert(99%) sepia(0%) saturate(5%) hue-rotate(138deg) brightness(102%) contrast(102%);
+    }
+    .links{
+        font-weight: 600;
+        text-decoration: none;
+        color:white;
+    }
+    .sbg2{
+        background-color:rgb(62, 62, 62)
+    }
+}
