@@ -1,13 +1,24 @@
-import { useContext } from "react"
+import { useContext, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom"
 import { ThemeContext, widthContext } from "../App"
 import { NavBarHome, FooterHome, FooterHomeSticky } from './HeaderFooterLogged'
 import '../scss/home.scss'
+import { PostModal } from './PostModal';
+import { Post } from './Post';
+import { getUser } from '../controller/query/userQuery';
+import { useMutation, useQuery } from '@apollo/client';
 
 export const HomePage = () =>{
+    const [open, setOpen] = useState(false);
     const {width, setWidth} = useContext(widthContext)
     const {currTheme,setCurrTheme} = useContext(ThemeContext)
-    const {id}=useParams()
+    const id=JSON.parse(localStorage.getItem("userid")||"")
+    const {loading,data,error} = useQuery(getUser,{variables: {id:id}});
+    let user
+    if(loading == false){
+        user = data.getCurrentUser
+        console.log(user)
+    }
     let emailInput
     let passInput
     const navigateTo = useNavigate()
@@ -16,22 +27,23 @@ export const HomePage = () =>{
     } else {
         document.body.style.backgroundColor = "#eeeeee";
     }
-    {console.log(id)}
+    // {console.log(id)}
+    if(loading==false){
     return <div className={currTheme}>
         
-        <NavBarHome/>
-        <div className="below-navbar-login-register sbg2 ">
+        <NavBarHome />
+        <div className="below-navbar-login-register2 sbg2">
             <div className="home-page">
                 <div className="z-0 ">
                     <div className="home-profile-container">
                         <div className="home-profile sbg">
                                 <div className="profile-upper-background ">
-                                    <img src="https://d9jhi50qo719s.cloudfront.net/5il/samples/1osk_800.png?220402024834"></img>
+                                    <img src={user.backgroundphotourl} alt="https://d9jhi50qo719s.cloudfront.net/5il/samples/1osk_800.png?220402024834"></img>
                                     <div className="home-profile-picture">
-                                        <img src="https://i.pinimg.com/originals/26/8c/2a/268c2a61e262d539e5e90bfa44e5e12d.jpg"></img>
+                                        <img src={user.profilephotourl} alt="https://i.pinimg.com/originals/26/8c/2a/268c2a61e262d539e5e90bfa44e5e12d.jpg"></img>
                                     </div>
                                     <div className="center-all mt-2">
-                                        <p className="home-profile-name bl">Xiao</p>
+                                        <p className="home-profile-name bl">{user.firstname+" "+user.lastname}</p>
                                         <p className="home-profile-place">Student at Institut Teknik Liyue</p>
                                     </div>
                                     <hr className="border mt-2"></hr>
@@ -69,19 +81,41 @@ export const HomePage = () =>{
                                 </div>
                             </div>
                         </div>
-                        <div className="home-profile2 sbg"></div>
+                        <div className="home-profile2 sbg br-10 ">
+                            <button className="sbg phase-1 round-up">Groups</button>
+                            <button className="sbg phase-1">Events</button>
+                            <button className="sbg phase-1">Followed Hashtags</button>
+                            <hr className="line m-0"></hr>
+                            <button className="sbg phase-2 round-bottom">Discover more</button>
+                        </div>
                     </div>
-                    <div className="home-right-container sbg">
+                    {/* <div className="home-right-container sbg">
 
-                    </div>
+                    </div> */}
                 </div>
                 
                 
             </div>
-            <div className="home-posts-container sbg">
-
+            <div className="home-posts-container">
+                <div className="input-post-container">
+                    <div className="input-post">
+                        <div>
+                        {open && <PostModal setOpen={setOpen} />}
+                            {/* <img id="user-icon" src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="" /> */}
+                            <button onClick={()=>setOpen(true)} className="create-post-button" id="create-input" placeholder="Start a post">Create a post</button>
+                        </div>
+                    </div>
+                    <div>
+                        <Post/>
+                    </div>
                 </div>
+                
+            </div>
+            <FooterHomeSticky/>
         </div>
-        <FooterHomeSticky/>
+        
     </div>
+    }else{
+        return <div></div>
+    }
 }

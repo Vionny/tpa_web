@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { ThemeContext, widthContext } from "../App"
 
 
@@ -16,7 +16,7 @@ export const NavBarHome = () =>{
     }
     
     return (
-    <div className=' sbg p-0'>
+    <div className='t-0 sbg p-0 z-4 w-100'>
             <div className="navbar-home justify-between flex justify-between">
                 <div className="search sbg">
                     <ul>
@@ -31,7 +31,9 @@ export const NavBarHome = () =>{
                     <li><div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Suitcase_icon.svg/1280px-Suitcase_icon.svg.png"></img>Jobs</div></li>
                     <li><div><img src="https://cdn-icons-png.flaticon.com/512/1004/1004017.png"></img>Messaging</div></li>
                     <li><div><img src="https://cdn-icons-png.flaticon.com/512/565/565422.png"></img>Notifications</div></li>
-                    <li><div><img src="https://i.pinimg.com/736x/a7/ba/3f/a7ba3f986ee7af992db650b2cb64eba6.jpg" className="profile"></img>Me</div></li>
+                    <li><div>
+                        <img src="https://i.pinimg.com/736x/a7/ba/3f/a7ba3f986ee7af992db650b2cb64eba6.jpg" className="profile dropbtn"></img>Me
+                        </div></li>
                     </ul>
                 </div>
             </div>
@@ -52,13 +54,12 @@ export const FooterHome = () =>{
     }
     return<div className='navbar-login-register2 sbg'>
             <ul>
-                <li><img   className="logo-linked im" src="https://www.logo.wine/a/logo/LinkedIn/LinkedIn-Wordmark-Black-Logo.wine.svg" ></img><li>© 2022</li></li>
-                <li>User Agreement</li>
-                <li>Privacy Policy</li>
-                <li>Community Guidelines</li>
-                <li>Cookie Policy</li>
-                <li>Copyright Policy</li>
-                <li>Send Feedback</li>
+            <Link  to="https://www.linkedin.com/legal/user-agreement?trk=homepage-basic_footer-user-agreement"><li className="link-fixed">User Agreement</li></Link>
+                <Link to="https://www.linkedin.com/legal/privacy-policy"><li  className="link-fixed">Privacy Policy</li></Link>
+                <Link to="https://www.linkedin.com/legal/professional-community-policies?trk=homepage-basic_footer-community-guide"><li  className="link-fixed">Community Guidelines</li></Link>
+                <Link to="https://www.linkedin.com/legal/cookie-policy?trk=homepage-basic_footer-cookie-policy"><li  className="link-fixed">Cookie Policy</li></Link>
+                <Link to="https://www.linkedin.com/legal/copyright-policy?trk=homepage-basic_footer-copyright-policy"><li className="link-fixed">Copyright Policy</li></Link>
+                <Link to="https://www.linkedin.com/help/linkedin/answer/a529150/provide-feedback-on-linkedin-search-results?lang=en"><li className="link-fixed">Send Feedback</li></Link>
                 <li>Language</li>
             </ul>
         </div>
@@ -78,13 +79,12 @@ export const FooterHomeSticky = () =>{
     return<div className='navbar-login-register3 sbg'>
             <ul>
                 <li><img   className="logo-linked im" src="https://www.logo.wine/a/logo/LinkedIn/LinkedIn-Wordmark-Black-Logo.wine.svg" ></img><li>© 2022</li></li>
-                <li>User Agreement</li>
-                <li>Privacy Policy</li>
-                <li>Community Guidelines</li>
-                <li>Cookie Policy</li>
-                <li>Copyright Policy</li>
-                <li>Send Feedback</li>
-                <li>Language</li>
+                <Link  to="https://www.linkedin.com/legal/user-agreement?trk=homepage-basic_footer-user-agreement"><li className="link-fixed">User Agreement</li></Link>
+                <Link to="https://www.linkedin.com/legal/privacy-policy"><li  className="link-fixed">Privacy Policy</li></Link>
+                <Link to="https://www.linkedin.com/legal/professional-community-policies?trk=homepage-basic_footer-community-guide"><li  className="link-fixed">Community Guidelines</li></Link>
+                <Link to="https://www.linkedin.com/legal/cookie-policy?trk=homepage-basic_footer-cookie-policy"><li  className="link-fixed">Cookie Policy</li></Link>
+                <Link to="https://www.linkedin.com/legal/copyright-policy?trk=homepage-basic_footer-copyright-policy"><li className="link-fixed">Copyright Policy</li></Link>
+                <Link to="https://www.linkedin.com/help/linkedin/answer/a529150/provide-feedback-on-linkedin-search-results?lang=en"><li className="link-fixed">Send Feedback</li></Link>
             </ul>
         </div>
 }

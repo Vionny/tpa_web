@@ -1,3 +1,5 @@
+@use 'colors.scss' as *;
+
 .light{
     display:flex;
     flex-direction:column;
@@ -26,7 +28,7 @@
     }
     .bt2{
         background-color:white;
-        color: rgb(107, 107, 107);
+        color: $white-grey;
     }
     .bg{
         background-color: white;

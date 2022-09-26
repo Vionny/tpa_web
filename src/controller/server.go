@@ -69,7 +69,7 @@ func main() {
 
 	db := database.Getdb()
 
-	db.AutoMigrate(&model.User{})
+	db.AutoMigrate(&model.User{}, &model.Post{})
 	router := mux.NewRouter()
 	router.Use(MyCors)
 	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{

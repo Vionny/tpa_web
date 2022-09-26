@@ -19,6 +19,26 @@ type User {
   isactive : Boolean!
 }
 
+type Post{
+  id:ID!
+  userid : ID!
+  text : String!
+  link : String!
+}
+
+type Comment{
+  id:ID!
+  userid:ID!
+  postid : ID!
+  repliedto: String!
+  text:String!
+}
+
+type LikedPost{
+  postid : ID!
+  userid : ID!
+}
+
 input NewUser{
   email : String!
   firstname : String!
@@ -34,16 +54,38 @@ input NewUser{
   isactive : Boolean!
 }
 
+input NewPost{
+  userid : ID!
+  text : String!
+  link : String!
+}
 
+input NewComment {
+  userid:ID!
+  postid : ID!
+  repliedto: String!
+  text:String!
+}
+
+input PostLiked{
+  postid : ID!
+  userid : ID!
+}
 
 type Query {
   users: [User!]!
+  getCurrentUser(id: ID!): User!
 }
 
 
 type Mutation {
+  createComment(input:NewComment!): Comment!
+  createPost(input: NewPost!): Post!
   createUser(input: NewUser!): User!
   updateUser(input: NewUser!,id: ID!): User!
+  inputLike(input:PostLiked!) : LikedPost!
+  activateAccount(id: ID!): User!
   deleteUser(id: ID!): User!
   login(email: String!, password:String!): User!
+  
 }

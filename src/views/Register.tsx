@@ -11,6 +11,8 @@ export const RegisterPage = ()=>{
     const [RegisterQuery]=useMutation(register)
     const [emailInput,setEmailInput] = useState("")
     const [passInput,setPassInput] = useState("")
+    const [fn,setFn]= useState("")
+    const [ln, setLn]= useState("")
     const [err,setErr] = useState("")
     let navigateTo = useNavigate()
     if(currTheme === "dark"){
@@ -20,12 +22,12 @@ export const RegisterPage = ()=>{
     }
     function loginUser(){
         // console.log(emailInput,passInput)
-        if(emailInput===""||passInput===""){
+        if(emailInput===""||passInput===""||fn===""||ln===""){
             setErr("Please fill in the blank")
             return;
         }
-        RegisterQuery({variables : {email: emailInput,password : passInput}}).then((data)=>{
-            // console.log(data.data.login.id)
+        RegisterQuery({variables : {email: emailInput,password : passInput,firstname:fn,lastname:ln}}).then((data)=>{
+            console.log(data)
             navigateTo('/')
 
         }).catch((err)=>{
@@ -34,15 +36,34 @@ export const RegisterPage = ()=>{
     }
     
     return <div className={currTheme}>
+        
         <div className='navbar-login-register sbg'>
+        
             <ul>
                 <li><img   className="logo-linked im" src="https://www.logo.wine/a/logo/LinkedIn/LinkedIn-Wordmark-Black-Logo.wine.svg" ></img></li>
-                <li className="theme-icon"><img onClick={() => {currTheme === "light" ?setCurrTheme('dark'): setCurrTheme('light') }} className ='im' src="https://www.iconpacks.net/icons/2/free-sun-icon-3337-thumb.png" ></img></li>
+                <li className="theme-icon"><img onClick={() => {
+                    if(currTheme === "light"){
+                        setCurrTheme('dark'),
+                        localStorage.setItem("theme","dark")
+                    }else{
+                        setCurrTheme('light') 
+                        localStorage.setItem("theme","light")
+                    } }} className ='im' src="https://www.iconpacks.net/icons/2/free-sun-icon-3337-thumb.png" ></img></li>
             </ul>
         </div>
         <div className="below-navbar-login-register">
+            
             <div className="login-box">
-                
+                <div className="flex flex-row f-l">
+                    <div className="input-login-styling">
+                    <p>First Name</p>
+                    <input className="text-center self" onChange={(e)=>{setFn(e.target.value)}}  type="text"></input>
+                    </div>
+                    <div className="input-login-styling last-n">
+                    <p>Last Name</p>
+                    <input className="text-center self" onChange={(e)=>{setLn(e.target.value)}}  type="text"></input>
+                    </div>
+                </div>
                 <div className="input-login-styling">
                     <p>Email</p>
                     <input className="text-center self" onChange={(e)=>{setEmailInput(e.target.value)}}  type="text"></input>
@@ -69,14 +90,13 @@ export const RegisterPage = ()=>{
         </div>
         <div className='navbar-login-register2 sbg'>
             <ul>
-                <li><img   className="logo-linked im" src="https://www.logo.wine/a/logo/LinkedIn/LinkedIn-Wordmark-Black-Logo.wine.svg" ></img><li>© 2022</li></li>
-                <li>User Agreement</li>
-                <li>Privacy Policy</li>
-                <li>Community Guidelines</li>
-                <li>Cookie Policy</li>
-                <li>Copyright Policy</li>
-                <li>Send Feedback</li>
-                <li>Language</li>
+            <li><img   className="logo-linked im" src="https://www.logo.wine/a/logo/LinkedIn/LinkedIn-Wordmark-Black-Logo.wine.svg" ></img><li>© 2022</li></li>
+            <Link  to="https://www.linkedin.com/legal/user-agreement?trk=homepage-basic_footer-user-agreement"><li className="link-fixed">User Agreement</li></Link>
+                <Link to="https://www.linkedin.com/legal/privacy-policy"><li  className="link-fixed">Privacy Policy</li></Link>
+                <Link to="https://www.linkedin.com/legal/professional-community-policies?trk=homepage-basic_footer-community-guide"><li  className="link-fixed">Community Guidelines</li></Link>
+                <Link to="https://www.linkedin.com/legal/cookie-policy?trk=homepage-basic_footer-cookie-policy"><li  className="link-fixed">Cookie Policy</li></Link>
+                <Link to="https://www.linkedin.com/legal/copyright-policy?trk=homepage-basic_footer-copyright-policy"><li className="link-fixed">Copyright Policy</li></Link>
+                <Link to="https://www.linkedin.com/help/linkedin/answer/a529150/provide-feedback-on-linkedin-search-results?lang=en"><li className="link-fixed">Send Feedback</li></Link>
             </ul>
         </div>
         

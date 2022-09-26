@@ -15,12 +15,7 @@ export const LoginPage = ()=>{
     const [passInput,setPassInput] = useState("")
     const [err,setErr] = useState("")
     let navigateTo = useNavigate()
-
-    if(currTheme === "dark"){
-        document.body.style.backgroundColor = "#5c5c5c";
-    } else {
-        document.body.style.backgroundColor = "#FFFFFF";
-    }
+    
     function loginUser(){
         // console.log(emailInput,passInput)
         if(emailInput===""||passInput===""){
@@ -33,8 +28,8 @@ export const LoginPage = ()=>{
                 setErr("Invalid credentials")
                 return;
             }
-            localStorage.setItem('userid',JSON.stringify(data.data.login.id))
-            navigateTo('/home')
+            localStorage.setItem('userid',JSON.stringify(data.data.login.id.toString()))
+            navigateTo('/home/')
 
         })
     }
@@ -43,7 +38,14 @@ export const LoginPage = ()=>{
         <div className='navbar-login-register sbg'>
             <ul>
                 <li><img   className="logo-linked im" src="https://www.logo.wine/a/logo/LinkedIn/LinkedIn-Wordmark-Black-Logo.wine.svg" ></img></li>
-                <li className="theme-icon"><img onClick={() => {currTheme === "light" ?setCurrTheme('dark'): setCurrTheme('light') }} className ='im' src="https://www.iconpacks.net/icons/2/free-sun-icon-3337-thumb.png" ></img></li>
+                <li className="theme-icon"><img onClick={() => {
+                    if(currTheme === "light"){
+                        setCurrTheme('dark'),
+                        localStorage.setItem("theme","dark")
+                    }else{
+                        setCurrTheme('light') 
+                        localStorage.setItem("theme","light")
+                    } }} className ='im' src="https://www.iconpacks.net/icons/2/free-sun-icon-3337-thumb.png" ></img></li>
             </ul>
         </div>
         <div className="below-navbar-login-register ">
@@ -73,13 +75,12 @@ export const LoginPage = ()=>{
         <div className='navbar-login-register2 sbg'>
             <ul>
                 <li><img   className="logo-linked im" src="https://www.logo.wine/a/logo/LinkedIn/LinkedIn-Wordmark-Black-Logo.wine.svg" ></img><li>© 2022</li></li>
-                <li>User Agreement</li>
-                <li>Privacy Policy</li>
-                <li>Community Guidelines</li>
-                <li>Cookie Policy</li>
-                <li>Copyright Policy</li>
-                <li>Send Feedback</li>
-                <li>Language</li>
+                <Link  to="https://www.linkedin.com/legal/user-agreement?trk=homepage-basic_footer-user-agreement"><li className="link-fixed">User Agreement</li></Link>
+                <Link to="https://www.linkedin.com/legal/privacy-policy"><li  className="link-fixed">Privacy Policy</li></Link>
+                <Link to="https://www.linkedin.com/legal/professional-community-policies?trk=homepage-basic_footer-community-guide"><li  className="link-fixed">Community Guidelines</li></Link>
+                <Link to="https://www.linkedin.com/legal/cookie-policy?trk=homepage-basic_footer-cookie-policy"><li  className="link-fixed">Cookie Policy</li></Link>
+                <Link to="https://www.linkedin.com/legal/copyright-policy?trk=homepage-basic_footer-copyright-policy"><li className="link-fixed">Copyright Policy</li></Link>
+                <Link to="https://www.linkedin.com/help/linkedin/answer/a529150/provide-feedback-on-linkedin-search-results?lang=en"><li className="link-fixed">Send Feedback</li></Link>
             </ul>
         </div>
         

@@ -1,8 +1,29 @@
+.br-10{
+  border-radius: 10px;
+}
+.round-up{
+  border-radius: 10px 10px 0px 0px;
+}
+.round-bottom{
+  border-radius: 0px 0px 10px 10px ;
+}
+.mt-5s{
+  margin-top:5%
+}
+.w-100{
+  width:100%
+}
+.t-0{
+  top:0
+}
 .fixed{
   position:fixed
 }
 .z-0{
   z-index: 0;
+}
+.z-4{
+  z-index:4;
 }
 body {
   padding: 0;

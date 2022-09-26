@@ -1,9 +1,28 @@
 @use 'css-library.scss' as *;
+@use 'colors.scss' as *;
 body{
     // height:fit-content;
-    height:5000px
+    // height:5000px
 }
-
+.link-fixed{
+    color:$black;
+    text-decoration: none;
+    padding-top:15px
+}
+.input-post-container{
+    padding-left: 5%;
+    padding-right:5% ;
+    padding-top:2%;
+}
+.create-post-button{
+    width:100%;
+    font-size: 18px;
+    height:40px;
+    align-self: center;
+    border-radius:20px;
+    border-color: transparent;
+    color:$secondary;
+}
 .navbar-home{
     max-width:100%;
     max-height:12%;
@@ -84,17 +103,16 @@ body{
     border-radius: solid 1px black;
     width:75%;
     height:100%;
-    position:absolute
 }
 
 .home-profile-container{
     display:flex;
     flex-direction: column;
     width:15%;
+    margin-top:20px;
     // width:220px;
     height:77%;
     position:fixed;
-    margin-top:1.8%;
     left:13.4%;
 }
 .home-right-container{
@@ -102,7 +120,7 @@ body{
     height:82%;
     position:fixed;
     margin-top:1.8%;
-    right:13%;
+    right:12%;
 }
 
 .home-posts-container{
@@ -110,7 +128,7 @@ body{
     height:100%;
     position:relative;
     z-index: 2;
-
+    
 }
 
 .home-profile{
@@ -124,8 +142,24 @@ body{
     width:100%;
     height:27%;
     margin-top:5%;
-    
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    button{
+        border:none;
+        width:100%;
+        color:black;
+        font-size:10px;
+    }
+    
+    .phase-1{
+        text-align: left;
+        text-indent: 2%;
+        height:24%;
+    }
+    .phase-2{
+        height:28%;
+    }
 }
 .profile-upper-background{
     width:100%;
