@@ -1,6 +1,8 @@
 # GraphQL schema example
 #
 # https://gqlgen.com/getting-started/
+directive @goField(forceResolver: Boolean, name: String) on FIELD_DEFINITION | INPUT_FIELD_DEFINITION
+
 
 
 type User {
@@ -17,6 +19,33 @@ type User {
   about : String!
   location : String!
   isactive : Boolean!
+  reset_id : String!
+}
+
+
+
+
+type Comment{
+  id:ID!
+  userid:ID!
+  postid : ID!
+  repliedto: String!
+  text:String!
+}
+
+type LikedPost{
+  postid : ID!
+  userid : ID!
+}
+
+type Post{
+  id:ID!
+  userid : ID!
+  text : String!
+  link : String!
+  type : String!
+  like : Int!
+  share: Int!
 }
 
 input NewUser{
@@ -34,16 +63,112 @@ input NewUser{
   isactive : Boolean!
 }
 
+input NewPost{
+  userid : ID!
+  text : String!
+  link : String!
+  type: String!
+}
+
+input NewComment {
+  userid:ID!
+  postid : ID!
+  repliedto: String!
+  text:String!
+}
+
+input PostLiked{
+  postid : ID!
+  userid : ID!
+}
+
+type Experience {
+  id: ID!
+  userID: ID!
+  title: String!
+  type: String!
+  company: String!
+  country: String!
+  isActive: Boolean!
+  startYear: Int!
+  endYear: Int!
+}
+
+input InputExperience {
+  userID: ID!
+  title: String!
+  type: String!
+  company: String!
+  country: String!
+  isActive: Boolean!
+  startYear: Int!
+  endYear: Int!
+}
+type Search{
+  Users : [User!]! @goField(forceResolver: true)
+  Posts : [Post!]! @goField(forceResolver: true) 
+}
+type Education {
+  id: ID!
+  userID: ID!
+  institution: String!
+  degree: String!
+  field: String!
+  grade: Float!
+  isActive: Boolean!
+  startYear: Int!
+  endYear: Int!
+  activities: String!
+  desc: String!
+}
+
+input InputEducation {
+  userID: ID!
+  institution: String!
+  degree: String!
+  field: String!
+  grade: Float!
+  isActive: Boolean!
+  startYear: Int!
+  endYear: Int!
+  activities: String!
+  desc: String!
+}
 
 
 type Query {
   users: [User!]!
+  getCurrentUser(id: ID!): User!
+  getResetID(reset_id:String!) : User!
+  getUserEducation(id: ID!): [Education!]!
+  getUserExperience(id: ID!): [Experience!]!
+  
+  getAllPosts(Limit:Int!, Offset:Int!):[Post!]!
+  searchPosts(Keyword : String!, Limit:Int!, Offset:Int!) : Search!
 }
 
 
 type Mutation {
+  createComment(input:NewComment!): Comment!
+  createPost(input: NewPost!): Post!
   createUser(input: NewUser!): User!
+  createExperience(input: InputExperience!): Experience!
+  createEducation(input: InputEducation!): Education!
+  
+  googleUser(input: NewUser!): User!
   updateUser(input: NewUser!,id: ID!): User!
+  updateExperience(input: InputExperience!,id: ID!):Experience!
+  updateEducation(input:InputEducation!,id: ID!): Education!
+  changePassword(id:ID! , password:String!) : User!
+  setProfilePic(id:ID!, url : String!) : User!
+  setBackgroundPic(id:ID!, url : String!) : User!
+
+
+  inputLike(input:PostLiked!) : LikedPost!
+  sendActivateEmail(email:String!): User!
+  activateAccount(id: ID!): User!
   deleteUser(id: ID!): User!
   login(email: String!, password:String!): User!
+  forgotPassword(email: String!) : User!
+  
 }

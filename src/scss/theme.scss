@@ -1,3 +1,5 @@
+@use 'colors.scss' as *;
+
 .light{
     display:flex;
     flex-direction:column;
@@ -26,13 +28,13 @@
     }
     .bt2{
         background-color:white;
-        color: rgb(107, 107, 107);
+        color: $white-grey;
     }
     .bg{
         background-color: white;
     }
     .sbg{
-        background-color: rgb(251, 251, 251);
+        background-color: rgb(249, 249, 249);
     }
     .im{
         filter: invert(35%) sepia(62%) saturate(3690%) hue-rotate(184deg) brightness(93%) contrast(101%);

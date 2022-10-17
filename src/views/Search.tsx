@@ -1,14 +1,14 @@
-import { useContext, useState } from 'react';
-import { Navigate, useNavigate, useParams } from "react-router-dom"
-import { ThemeContext, widthContext } from "../App"
-import { NavBarHome, FooterHome, FooterHomeSticky } from './HeaderFooterLogged'
-import '../scss/home.scss'
+import { useQuery } from "@apollo/client";
+import { Navigate, useNavigate } from "react-router-dom"
+import { getUser } from "../controller/query/userQuery";
+import { FooterHomeSticky, NavBarHome } from "./HeaderFooterLogged";
+import { Post } from "./Post";
 import { PostModal } from './PostModal';
-import { Post } from './Post';
-import { getUser } from '../controller/query/userQuery';
-import { useMutation, useQuery } from '@apollo/client';
+import { useContext , useState} from 'react';
+import { ThemeContext, widthContext } from '../App';
 
-export const HomePage = () =>{
+export const SearchPage= ()=>{
+    if (localStorage.getItem("userid")==undefined||localStorage.getItem("userid")=="") return <Navigate to="/"/>
     const [open, setOpen] = useState(false);
     const {width, setWidth} = useContext(widthContext)
     const {currTheme,setCurrTheme} = useContext(ThemeContext)
@@ -100,13 +100,8 @@ export const HomePage = () =>{
             <div className="home-posts-container">
                 <div className="input-post-container">
                     <div className="input-post">
-                        <div>
-                        {open && <PostModal setOpen={setOpen} />}
-                            {/* <img id="user-icon" src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="" /> */}
-                            <button onClick={()=>setOpen(true)} className="create-post-button" id="create-input" placeholder="Start a post">Create a post</button>
-                        </div>
                     </div>
-                        <Post/>
+                        <Post2/>
                 </div>
                 
             </div>
